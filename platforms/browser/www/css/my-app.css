@@ -1,0 +1,17 @@
+
+.navbar-inner i {
+	font-size: 30px;
+}
+#app-login-page, #app-registration-page {
+	background-color: #ffffff;
+	padding: 0 15px;
+}
+#login-form .list-block .item-content, #registration-form .list-block .item-content {
+	padding-left: 0px;
+}
+#login-form .list-block .list-block-label, #registration-form .list-block .list-block-label {
+	padding: 0px;
+}
+.login-page-logo {
+	text-align: center;
+}
