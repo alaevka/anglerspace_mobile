@@ -70,6 +70,27 @@ myApp.onPageInit('indexfeed', function (page) {
     });
 });
 
+myApp.onPageInit('create_post', function (page) {
+    $$('#post-submit-link').on('click', function () {
+        var formData = myApp.formToJSON('#create-post-form');
+        if(_createPostFormDataValidate(formData)) {
+            var token = localStorage.getItem("client_token");
+            $$.ajax({
+                url: backend_url + 'post', 
+                method: 'POST',
+                headers: {'Authorization' : "Bearer " + token},
+                data: {email: formData['post_text_data']},
+                success: function (data) {
+                    mainView.router.loadPage('templates/feed/index.html');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    myApp.alert('Код ошибки: ' + textStatus, 'Что-то пошло не так');
+                }
+            });
+        }
+    });
+});
+
 function _registrationFormDataValidate(formData) {
 	var constraints = {
     	name: {
@@ -111,6 +132,10 @@ function _registrationFormDataValidate(formData) {
 	} else {
 		return true;
 	}
+}
+
+function _createPostFormDataValidate(formData) {
+    return true;
 }
 
 function _loginFormDataValidate(formData) {
